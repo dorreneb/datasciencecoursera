@@ -1,5 +1,4 @@
 getMonitors <- function(directory, id) {
-  
   paths <- list()
   for (i in id) {
     path <- paste(directory, "/", sprintf("%03d.csv", i), sep="")
@@ -18,9 +17,14 @@ getMonitors <- function(directory, id) {
 
 pollutantmean <- function(directory, pollutant, id=1:332) {
   data<-getMonitors(directory, id)
-  mean(data[,pollutant], na.rm=TRUE)
+  round(mean(data[,pollutant], na.rm=TRUE), digits=3)
 }
 
+#vars to make calling the above functions easier
 dir <- "C:/Users/Dorrene/code/coursera/rprogramming/proj1/specdata"
-x <- pollutantmean(dir, "nitrate", 23)
-y <- getMonitors(dir, 23)
+monitors <- 23
+pollutants<- c("nitrate", "sulfate")
+
+#actually get the mean (testing)
+mean <- pollutantmean(dir, pollutants[1], monitors)
+data <- getMonitors(dir, monitors)
